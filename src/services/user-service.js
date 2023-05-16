@@ -16,6 +16,8 @@ class UserService{
         }
     }
 
+   
+
     async signIn(email , password){
        try {
             // step 1 -> fetch the user using email
@@ -25,7 +27,7 @@ class UserService{
             const passwordsMatch = this.comparePassword(password,user.password);
             
             if(!passwordsMatch){
-                console.log("Password dosn't match");
+                console.log("Password doesn't match");
                 throw { err : "Incorrect password"};
             }
 
@@ -65,6 +67,28 @@ class UserService{
             console.log('Something went wrong in token verification');
         }
     }
+
+    async isAuthenticated(token){
+       try {
+            const response = this.verifyToken(token);
+            if(!response){
+                throw {error: "Invalid token"};
+            }
+
+            const user = await userRepositoryObj.getById(response.id);
+
+            if(!user){
+                throw {error: "no user with given token exists"};
+            }
+
+            return user.id
+       } catch (error) {
+           console.log("something went wrong in auth process");
+           throw error;
+       }
+
+    }
+    
 }
 
 module.exports = UserService;

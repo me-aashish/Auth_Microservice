@@ -7,6 +7,7 @@ const validateRequest = (req,res,next) => {
             err : "email or password missing in the request"
         });
     }
+    next();
 }
 
 module.exports = {
