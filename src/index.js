@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 const apiRoutes = require('./routes/index'); 
 
 const UserRepository = require('./repository/user-repository');
-
+const db = require('./models/index');
+const {User , Role} = require('./models/index');
 
 const prepareAndStartServer = () =>{
 
@@ -17,10 +18,14 @@ const prepareAndStartServer = () =>{
     app.use('/api',apiRoutes);
     
     app.listen(PORT, async() =>{
-        const obj = new UserRepository();
 
-        // const sx = await obj.getUserByEmail('aashish@admin.com');
-        // console.log(sx);
+        if(process.env.DB_SYNC){
+            db.sequelize.sync({alert : true});
+        }
+
+        const u1 = await User.findByPk(1);
+        const r1 = await Role.findByPk(1);
+        u1.addRoles(r1);
         
         console.log(`Server Started on Port:  ${PORT}`)
     });
