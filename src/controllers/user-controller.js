@@ -52,7 +52,7 @@ const isAuthenticated = async(req,res) => {
         res.status(200).json({
             data : response,
             success: true,
-            message: "user is authenticated",
+            message: "user is authenticated successfully",
             err: {}
         })
     } catch (error) {
