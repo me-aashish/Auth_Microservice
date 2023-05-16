@@ -1,7 +1,7 @@
 {
   "name": "authservice",
   "version": "1.0.0",
-  "description": "",
+  "description": "Auth MicroSevice",
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon src/index.js"
@@ -17,5 +17,14 @@
     "nodemon": "^2.0.22",
     "sequelize": "^6.29.3",
     "sequelize-cli": "^6.6.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/me-aashish/Auth_Service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/me-aashish/Auth_Service/issues"
+  },
+  "homepage": "https://github.com/me-aashish/Auth_Service#readme"
 }

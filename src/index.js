@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const apiRoutes = require('./routes/index'); 
 
 
+
 const prepareAndStartServer = () =>{
 
     app.use(bodyParser.json());
@@ -14,7 +15,13 @@ const prepareAndStartServer = () =>{
 
     app.use('/api',apiRoutes);
     
-    app.listen(PORT, () =>{
+    app.listen(PORT, async() =>{
+        const UserRepository = require('./repository/user-repository');
+        const userRepositoryObj = new UserRepository();
+
+        const response = await userRepositoryObj.getById(2);
+        console.log(response);
+    
         console.log(`Server Started on Port:  ${PORT}`)
     });
 }
