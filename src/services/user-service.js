@@ -16,27 +16,28 @@ class UserService{
         }
     }
 
-    // async signIn(email , password){
-    //    try {
-    //         // step 1 -> fetch the user using email
-    //         const user = await userRepositoryObj.getUserByEmail(email);
+    async signIn(email , password){
+       try {
+            // step 1 -> fetch the user using email
+            const user = await userRepositoryObj.getUserByEmail(email);
             
-    //         // step 2 -> compare incoming plain password with the stored encrypted password
-    //         const passwordsMatch = this.comparePassword(password,user.password);
+            // step 2 -> compare incoming plain password with the stored encrypted password
+            const passwordsMatch = this.comparePassword(password,user.password);
             
-    //         if(!passwordsMatch){
-    //             console.log("Password dosn't match");
-    //             throw { err : "Incorrect password"};
-    //         }
+            if(!passwordsMatch){
+                console.log("Password dosn't match");
+                throw { err : "Incorrect password"};
+            }
 
-    //         const newJWT = this.createToken({email : user.email, id : user.id});
-    //         return newJWT;
-    //    } catch (error) {
-    //        console.log('Something went wrong in sign in process');
-    //        throw error;
-    //    }
+            // if password matches then create a token and send it to the user
+            const newJWT = this.createToken({email : user.email, id : user.id});
+            return newJWT;
+       } catch (error) {
+           console.log('Something went wrong in sign in process');
+           throw error;
+       }
 
-    // }
+    }
 
     comparePassword(plainPassword , encryptedPassword){
        try {

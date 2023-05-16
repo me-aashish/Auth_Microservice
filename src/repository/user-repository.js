@@ -40,7 +40,7 @@ class UserRepository{
 
     async getUserByEmail(userEmail){
         try {
-            const user = await User.findAll({
+            const user = await User.findOne({
                 where : {
                     email : userEmail
                 }
