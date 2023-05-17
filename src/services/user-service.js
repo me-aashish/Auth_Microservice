@@ -88,6 +88,16 @@ class UserService{
        }
 
     }
+
+    async isAdmin(userId){
+        try {
+            const response = await userRepositoryObj.isAdmin(userId);
+            return response;
+        } catch (error) {
+            console.log("Something went wrong on service layer");
+            throw error;
+        }
+    }
     
 }
 

@@ -66,8 +66,29 @@ const isAuthenticated = async(req,res) => {
     }
 }
 
+const isAdmin = async(req,res) => {
+    try {
+        const adminOrNot = await userServiceObj.isAdmin(req.body.id);
+        return res.status(200).json({
+            data : adminOrNot,
+            success: true,
+            message: "successfully fetched whether user is admin or not",
+            err: {}
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message : "Something went wrong",
+            data : {},
+            success : false,
+            err: error
+        });
+    }
+}
+
 module.exports = {
     create,
     signIn,
-    isAuthenticated
+    isAuthenticated,
+    isAdmin
 }
